@@ -53,7 +53,7 @@ public class AutoCADRecorder extends AbstractSubscriber<Quadrangle> {
 
         subs.put(id, newParameters);
     }
-
+//
 
 
     @Override

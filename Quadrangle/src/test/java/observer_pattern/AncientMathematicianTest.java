@@ -56,7 +56,7 @@ class AncientMathematicianTest {
         // Assert
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(mockPapyrus).write(captor.capture());
-
+//
         String loggedEntry = captor.getValue();
         assertTrue(loggedEntry.contains("quadrangleId=" + mockId));
         assertTrue(loggedEntry.contains("type=SQUARE"));

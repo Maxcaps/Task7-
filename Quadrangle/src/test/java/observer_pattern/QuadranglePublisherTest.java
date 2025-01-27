@@ -41,7 +41,7 @@ class QuadranglePublisherTest {
         quadranglePublisher.notifySubscribers(); // Проверяем, вызывается ли метод update
         verify(mockSubscriber, times(1)).update(quadranglePublisher);
     }
-
+//
     @Test
     void testRemoveSubscriber() {
         // Arrange

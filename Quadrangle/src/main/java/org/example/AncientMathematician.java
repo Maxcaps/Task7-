@@ -21,7 +21,7 @@ public class AncientMathematician extends AbstractSubscriber<Quadrangle> {
         this.quadrangleCalculator = quadrangleCalculator;
         this.papyrus = papyrus;
     }
-
+//
     private void writeToPapyrus(UUID id, QuadrangleParameters quadrangleParameters, int version) {
         String entry = String.format(
                 java.util.Locale.ENGLISH, // Указываем локаль

@@ -14,7 +14,7 @@ public abstract class AbstractSubscriber<T> implements Subscriber<T> {
         // Default behavior: no pre-processing
     }
     protected abstract void handleUpdate(T object);
-
+//
     protected void postUpdate(T object) {
         // Default behavior: no post-processing
     }
