@@ -1,13 +1,12 @@
 package org.example.model;
 
 public class Papyrus {
-    private String content = "";
-
+    private final StringBuilder content = new StringBuilder();
     public void write(String entry) {
-        content += entry;
+        content.append(entry);
     }
 
     public String read() {
-        return content;
+        return content.toString();
     }
 }
