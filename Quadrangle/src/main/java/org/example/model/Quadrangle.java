@@ -1,10 +1,8 @@
 package org.example.model;
 
-import java.util.UUID;
-
 public class Quadrangle {
-    private final UUID id;
-    private final Point[] points;
+    private final String id;
+    private Point[] points;
 
     public Quadrangle(Point[] points) {
         if (points.length != 4) {
@@ -14,7 +12,7 @@ public class Quadrangle {
         this.points = points;
     }
 
-    public Quadrangle(Point[] points, UUID id) {
+    public Quadrangle(Point[] points, String id) {
         if (points.length != 4) {
             throw new IllegalArgumentException("The quadrangle must contain exactly 4 points.");
         }
@@ -22,7 +20,7 @@ public class Quadrangle {
         this.id = id;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
@@ -30,4 +28,10 @@ public class Quadrangle {
         return points;
     }
 
+    public void setPoints(Point[] points) {
+        if (points.length != 4) {
+            throw new IllegalArgumentException("The quadrangle must contain exactly 4 points.");
+        }
+        this.points = points;
+    }
 }

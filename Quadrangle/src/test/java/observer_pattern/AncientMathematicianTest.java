@@ -1,6 +1,6 @@
 package observer_pattern;
 
-import org.example.AncientMathematician;
+import org.example.observer_pattern.AncientMathematician;
 import org.example.calculators.QuadrangleCalculator;
 import org.example.model.Papyrus;
 import org.example.model.Point;
@@ -14,7 +14,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
-import java.util.UUID;
+import java.util.String;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -38,7 +38,7 @@ class AncientMathematicianTest {
     @Test
     void testHandleUpdate_NewQuadrangle() {
         // Arrange
-        UUID mockId = UUID.randomUUID();
+        String mockId = String.randomString();
         Point[] points = new Point[]{
                 new Point(0, 0), new Point(0, 4),
                 new Point(4, 4), new Point(4, 0)
@@ -68,7 +68,7 @@ class AncientMathematicianTest {
     @Test
     void testGetQuadrangleParameters_Found() {
         // Arrange
-        UUID mockId = UUID.randomUUID();
+        String mockId = String.randomString();
         String papyrusContent = String.format(
                 "quadrangleId=%s v1, type=RECTANGLE, area=20.00, perimeter=18.00, convex=true",
                 mockId
@@ -90,7 +90,7 @@ class AncientMathematicianTest {
     @Test
     void testGetQuadrangleParameters_NotFound() {
         // Arrange
-        UUID mockId = UUID.randomUUID();
+        String mockId = String.randomString();
         when(mockPapyrus.read()).thenReturn("");
 
         // Act
@@ -103,7 +103,7 @@ class AncientMathematicianTest {
     @Test
     void testUpdateQuadrangleNumericParameters() {
         // Arrange
-        UUID mockId = UUID.randomUUID();
+        String mockId = String.randomString();
         String papyrusContent = String.format(
                 "quadrangleId=%s v1, type=RECTANGLE, area=20.00, perimeter=18.00, convex=true",
                 mockId
@@ -126,7 +126,7 @@ class AncientMathematicianTest {
     @Test
     void testUpdateQuadrangleNumericParameters_NoMatchingId() {
         // Arrange
-        UUID mockId = UUID.randomUUID();
+        String mockId = String.randomString();
         when(mockPapyrus.read()).thenReturn("");
 
         // Act & Assert

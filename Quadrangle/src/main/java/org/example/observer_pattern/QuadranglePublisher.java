@@ -1,4 +1,4 @@
-package org.example;
+package org.example.observer_pattern;
 
 import org.example.model.Point;
 import org.example.model.Quadrangle;
@@ -12,11 +12,15 @@ public class QuadranglePublisher extends Quadrangle implements Publisher<Quadran
         super(points);
     }
 
-    public QuadranglePublisher(Point[] points, UUID id) {
+    public QuadranglePublisher(Point[] points, String id) {
         super(points, id);
     }
 
     public void updatePoints(List<Point> points) {
+        if (points.size() != 4) {
+            throw new IllegalArgumentException("Quadrangle must have exactly 4 points.");
+        }
+        System.out.println(" Updating points: " + points);
         Point[] array = points.toArray(new Point[0]);
         this.setPoints(array);
         this.notifySubscribers();

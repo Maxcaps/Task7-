@@ -1,14 +1,14 @@
-package org.example;
+package org.example.observer_pattern;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.QuadrangleType;
 import org.example.calculators.QuadrangleCalculator;
 import org.example.model.Papyrus;
 import org.example.model.Quadrangle;
 import org.example.model.QuadrangleParameters;
 
 import java.util.Optional;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,7 +22,7 @@ public class AncientMathematician extends AbstractSubscriber<Quadrangle> {
         this.papyrus = papyrus;
     }
 //
-    private void writeToPapyrus(UUID id, QuadrangleParameters quadrangleParameters, int version) {
+    private void writeToPapyrus(String id, QuadrangleParameters quadrangleParameters, int version) {
         String entry = String.format(
                 java.util.Locale.ENGLISH, // Указываем локаль
                 "quadrangleId=%s v%d, type=%s, area=%.2f, perimeter=%.2f, convex=%b",
@@ -36,7 +36,7 @@ public class AncientMathematician extends AbstractSubscriber<Quadrangle> {
     }
 
 
-    public Optional<QuadrangleParameters> getQuadrangleParameters(UUID id) {
+    public Optional<QuadrangleParameters> getQuadrangleParameters(String id) {
         String papyrusContent = papyrus.read();
         Pattern pattern = Pattern.compile("quadrangleId=" + id + " v\\d+, type=(.+?), area=(\\d+\\.\\d+),"
                 + " perimeter=(\\d+\\.\\d+), convex=(true|false)");
@@ -47,16 +47,16 @@ public class AncientMathematician extends AbstractSubscriber<Quadrangle> {
             double perimeter = Double.parseDouble(matcher.group(3));
             boolean isConvex = Boolean.parseBoolean(matcher.group(4));
             return Optional.of(new QuadrangleParameters(area, perimeter, quadrangleType,
-                    isConvex, quadrangleCalculator));
+                    isConvex));
         }
         return Optional.empty();
     }
 
-    public boolean isQuadranglePublisher(UUID id) {
+    public boolean isQuadranglePublisher(String id) {
         return papyrus.read().contains("quadrangleId=" + id);
     }
 
-    public void updateQuadrangleNumericParameters(UUID id, double areaMultiplyValue, double perimeterMultiplyValue) {
+    public void updateQuadrangleNumericParameters(String id, double areaMultiplyValue, double perimeterMultiplyValue) {
         String papyrusContent = papyrus.read();
         Pattern pattern = Pattern.compile("quadrangleId=" + id + " v(\\d+), type=(.+?), area=(\\d+\\.\\d+),"
                 + " perimeter=(\\d+\\.\\d+), convex=(true|false)");
@@ -69,8 +69,7 @@ public class AncientMathematician extends AbstractSubscriber<Quadrangle> {
             boolean isConvex = Boolean.parseBoolean(matcher.group(5)); // Выпуклость
             double updatedArea = currentArea * areaMultiplyValue;
             double updatedPerimeter = currentPerimeter * perimeterMultiplyValue;
-            QuadrangleParameters params = new QuadrangleParameters(updatedArea, updatedPerimeter, quadrangleType,
-                    isConvex, quadrangleCalculator);
+            QuadrangleParameters params = new QuadrangleParameters(updatedArea, updatedPerimeter, quadrangleType, isConvex);
             writeToPapyrus(id, params, version);
         } else {
             throw new IllegalArgumentException("No quadrangle found with this given ID in papyrus");
@@ -94,8 +93,7 @@ public class AncientMathematician extends AbstractSubscriber<Quadrangle> {
                 quadrangleCalculator.calculateArea(quadrangle),
                 quadrangleCalculator.calculatePerimeter(quadrangle),
                 quadrangleCalculator.findQuadrangleType(quadrangle),
-                quadrangleCalculator.isConvex(quadrangle),
-                quadrangleCalculator
+                quadrangleCalculator.isConvex(quadrangle)
         );
         writeToPapyrus(quadrangle.getId(), quadrangleParameters, newVersion);
     }

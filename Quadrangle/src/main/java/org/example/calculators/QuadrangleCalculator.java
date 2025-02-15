@@ -7,6 +7,7 @@ import org.example.model.MathVector;
 import org.example.model.Point;
 import org.example.model.Quadrangle;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class QuadrangleCalculator {
@@ -17,7 +18,7 @@ public class QuadrangleCalculator {
     public QuadrangleCalculator(PointsCalculator pointsCalculator, AnglesCalculator anglesCalculator) {
         this.pointsCalculator = pointsCalculator;
         this.anglesCalculator = anglesCalculator;
-     }
+    }
 
     public double calculatePerimeter(Quadrangle quadrangle) {
         Point[] points = quadrangle.getPoints();
@@ -113,8 +114,6 @@ public class QuadrangleCalculator {
 
         return maxDistance;
     }
-
-
 
 
 }

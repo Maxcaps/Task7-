@@ -2,12 +2,10 @@ package org.example.specifications;
 
 import org.example.model.Quadrangle;
 
-import java.util.UUID;
-
 public class IdSpecification implements QuadrangleSpecification {
-    private final UUID id;
+    private final String id;
 
-    public IdSpecification(UUID id) {
+    public IdSpecification(String id) {
         this.id = id;
     }
 

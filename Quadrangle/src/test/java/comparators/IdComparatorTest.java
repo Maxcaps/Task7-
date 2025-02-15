@@ -5,7 +5,7 @@ import org.example.model.Point;
 import org.example.model.Quadrangle;
 import org.junit.jupiter.api.Test;
 
-import java.util.UUID;
+import java.util.String;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,8 +14,8 @@ class IdComparatorTest {
     @Test
     void testCompare_ShouldReturnNegativeWhenFirstIdIsSmaller() {
         // Дано: два четырехугольника с разными ID
-        UUID id1 = UUID.randomUUID();
-        UUID id2 = UUID.randomUUID();
+        String id1 = String.randomString();
+        String id2 = String.randomString();
         Quadrangle q1 = new Quadrangle(
                 new Point[]{
                         new Point(0, 0),

@@ -1,22 +1,26 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.QuadrangleType;
 import org.example.calculators.QuadrangleCalculator;
 
+import javax.xml.bind.annotation.XmlElement;
 import java.io.File;
 import java.io.IOException;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class QuadrangleParameters {
     private static final Logger LOGGER = Logger.getLogger(QuadrangleParameters.class.getName());
-    private final double area;
-    private final double perimeter;
-    private final QuadrangleType type;
-    private final boolean isConvex;
+
+    private double area;
+    private double perimeter;
+    private QuadrangleType type;
+    private boolean isConvex;
 
     public QuadrangleParameters(Quadrangle quadrangle, QuadrangleCalculator quadrangleCalculator) {
         this.area = quadrangleCalculator.calculateArea(quadrangle);
@@ -37,10 +41,31 @@ public class QuadrangleParameters {
         this.isConvex = isConvex;
     }
 
+    public QuadrangleParameters() {
+    }
+
+    public void setArea(double area) {
+        this.area = area;
+    }
+
+    public void setPerimeter(double perimeter) {
+        this.perimeter = perimeter;
+    }
+
+    public void setType(QuadrangleType type) {
+        this.type = type;
+    }
+
+    public void setConvex(boolean convex) {
+        isConvex = convex;
+    }
+
     public double getArea() { return area; }
     public double getPerimeter() { return perimeter; }
     public QuadrangleType getType() { return type; }
     public boolean isConvex() { return isConvex; }
+
+
 
     @Override
     public String toString() {
